@@ -12,7 +12,10 @@ git clone https://github.com/andersonpensephp/docker-nginx-with-node.git
 cd docker-nginx-with-node
 
 # Rode o arquivo docker-compose.yaml:
-docker compose up
+docker compose up -d
+
+# Verifique se os containers foram inicializados:
+docker ps
 
 # Acesse a aplicação pelo navegador na porta 8080:
 localhost:8080
