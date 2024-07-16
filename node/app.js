@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
-const mysql = require('mysql2')
+const mysql = require('mysql')
+const { faker } = require('@faker-js/faker')
 
 dotenv.config()
 
@@ -12,17 +13,16 @@ const app = async () => {
 		password: process.env.MYSQL_PASSWORD,
 		database: process.env.MYSQL_DATABASE || 'nodedb'
 	}
-
-	const connection = mysql.createConnection(config)
-
-	const sql = `INSERT INTO people(name) value('Anderson')`
-	connection.query(sql)
-	connection.end()
-
+	
 	app.get('/', async (req, res) => {
-	const connection = mysql.createConnection(config)
+		const connection = await mysql.createConnection(config)
+		
+		const randomName = faker.person.fullName()
 
+		const sql = `INSERT INTO people(name) value('${randomName}')`
     const getPeopleSQL = `SELECT * FROM people`
+		
+		connection.query(sql)
 
 		connection.query(getPeopleSQL, async (err, result, fields) => {
 				
