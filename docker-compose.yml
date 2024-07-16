@@ -4,10 +4,11 @@ services:
   app:
     build:
       context: ./node
+    command: npm start
     container_name: app
-    entrypoint: sh -c "npm start"
     volumes:
       - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     tty: true
     ports:
       - 3000

@@ -8,5 +8,3 @@ RUN npm install
 RUN npm install -g nodemon
 
 COPY . .
-
-RUN ls
