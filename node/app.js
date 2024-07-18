@@ -1,7 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const mysql = require('mysql')
-const { faker } = require('@faker-js/faker')
 
 dotenv.config()
 
@@ -16,8 +15,10 @@ const app = async () => {
 	
 	app.get('/', async (req, res) => {
 		const connection = await mysql.createConnection(config)
+
+		const nameList = ['Carlos', 'Fernando', 'Renato', 'Felix', 'Ana', 'Bianca']
 		
-		const randomName = faker.person.fullName()
+		const randomName = nameList[Math.floor(Math.random() * nameList.length)]
 
 		const sql = `INSERT INTO people(name) value('${randomName}')`
     const getPeopleSQL = `SELECT * FROM people`
@@ -31,7 +32,7 @@ const app = async () => {
 					<br>
 					<ul>
 						${result.map(resultObj => {
-							return `<li>id: ${resultObj.id} - name: ${resultObj.name}</li>`
+							return `<li> Nome: ${resultObj.name}</li>`
 						})}
 					</ul>
 				`
